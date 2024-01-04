@@ -1,0 +1,8 @@
+-r docs.in
+-r production.in
+-r tests.in
+
+django-debug-toolbar
+django-stubs
+
+bumpver

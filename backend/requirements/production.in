@@ -1,0 +1,16 @@
+Django>=4.2,<4.3
+celery
+django-celery-beat
+django-environ
+django-extensions
+django-spaceless-templates
+django-storages
+django-watchman
+gunicorn
+ipython
+psycopg2-binary
+pymemcache
+python-dateutil
+python-json-logger
+sentry-sdk
+whitenoise[brotli]

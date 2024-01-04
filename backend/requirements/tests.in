@@ -1,0 +1,14 @@
+-r production.in
+
+black
+flake8
+isort
+mypy
+
+pre-commit
+
+pytest
+pytest-django
+pytest-factoryboy
+pytest-freezegun
+pytest-cov
