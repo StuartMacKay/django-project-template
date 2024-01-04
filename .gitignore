@@ -1,0 +1,20 @@
+# Editor temp files
+*~
+
+# Ignore dot files except those required for the project
+.*
+!.editorconfig
+!.gitattributes
+!.github
+!.gitignore
+!.gitkeep
+!.pre-commit-config.yaml
+!.python-version
+!.readthedocs.yml
+
+# Any local makefiles
+*.mk
+
+/media
+/logs
+/static
