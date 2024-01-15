@@ -5,8 +5,14 @@ from django.urls import reverse
 from ..factories import UserFactory
 
 
-class AdminTests:
-    """Tests for the Django Admin
+class AdminViewsMixin:
+    """Tests for the Django Admin views
+
+    For example:
+
+        class UserAdminTests(AdminViewsMixin, TestCase):
+            factory_class = UserFactory
+            query_count = 7
 
     The tests only check the changelist view, since that is where most of
     the errors will occur. There is little value in testing the add, change
