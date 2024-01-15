@@ -103,8 +103,8 @@ The organsiation of the Django files in the backend is reasonably standard:
     ├── backend
     │   ├── manage.py
     │   ├── bin
+    │   ├── apps
     │   ├── project
-    │   │   ├── apps
     │   │   ├── asgi.py
     │   │   ├── celery.py
     │   │   ├── gunicorn.py
@@ -144,13 +144,11 @@ so only the dependencies for production or testing are installed. The code
 for Django is organised into a root ``project`` module. This in turn has
 all the configuration files needed to run the site.
 
-The ``apps`` module is where you add your code. This is more or less for
-aesthetic reasons than anything else. It keeps all the project related
-code under one tree, so imports take the form:
+The ``apps`` module is where you add your code:
 
 ..  code-block:: python
 
-    from project.apps.reports import models
+    from apps.reports import models
 
 That way you can easily see which imports are from the project and which
 are from third-party libraries. It is simply a preference, since the
