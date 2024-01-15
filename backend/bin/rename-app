@@ -17,3 +17,4 @@ sed -i "s/\"project/\"$1/" project/asgi.py
 sed -i -E "s/(\"|\/)project/\1$1/g" project/settings.py
 sed -i "s/\"project/\"$1/" project/wsgi.py
 mv project $1
+mv tests/project tests/$1

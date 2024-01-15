@@ -115,13 +115,13 @@ The organsiation of the Django files in the backend is reasonably standard:
     │   │   │   ├── robots.txt
     │   │   │   └── site
     │   │   │       └── index.html
-    │   │   ├── tests
     │   │   ├── urls.py
     │   │   ├── views
     │   │   │   ├── index.py
     │   │   │   ├── robots.py
     │   │   │   └── sitemap.py
     │   │   └── wsgi.py
+│   │   ├── tests
     │   ├── .env.example
     │   ├── .envrc
     │   ├── docker-compose.override.yml.example
