@@ -19,11 +19,11 @@
 #
 
 project = "Django Project Templates"
-copyright = "2023, Stuart MacKay"
+copyright = "2024, Stuart MacKay"
 author = "Stuart MacKay"
 
-version = "v2023.01"
-release = "v2023.01.01"
+version = "v2024.01"
+release = "v2024.01.01"
 
 # -- General configuration ---------------------------------------------------
 
