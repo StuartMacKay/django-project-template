@@ -21,10 +21,7 @@ USER python
 
 # Install requirements
 
-COPY --chown=python:python requirements ./backend/requirements
 COPY --chown=python:python bin ./backend/bin
-
-RUN chmod 0755 backend/bin/* && backend/bin/install-requirements
 
 # Set up the runtime environment
 
