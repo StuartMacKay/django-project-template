@@ -130,4 +130,5 @@ dev-dependencies = [
     "pytest-django>=4.9.0",
     "pytest-factoryboy>=2.7.0",
     "pytest-freezegun>=0.4.2",
+    "ruff>=0.8.0",
 ]
