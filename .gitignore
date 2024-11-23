@@ -3,7 +3,11 @@
 
 # Ignore dot files except those required for the project
 .*
+!.dockerignore
 !.editorconfig
+!.env.example
+!.envrc
+!.flake8
 !.gitattributes
 !.github
 !.gitignore
@@ -15,6 +19,9 @@
 # Any local makefiles
 *.mk
 
+/coverage
 /media
 /logs
 /static
+
+docker-compose.override.yml
