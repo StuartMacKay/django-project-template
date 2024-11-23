@@ -23,13 +23,6 @@ dependencies = [
     "whitenoise[brotli]>=6.8.2",
 ]
 
-[tool.black]
-line-length = 88
-target-version = [
-    'py312'
-]
-exclude = ".*/migrations/.*"
-
 [tool.coverage.run]
 branch = true
 data_file = ".coverage"
@@ -137,5 +130,4 @@ dev-dependencies = [
     "pytest-django>=4.9.0",
     "pytest-factoryboy>=2.7.0",
     "pytest-freezegun>=0.4.2",
-    "black>=24.10.0",
 ]
