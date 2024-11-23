@@ -81,9 +81,9 @@ if DJANGO_ENV == "development" and DEBUG:
 #   WEB SERVER
 # ##############
 
-ROOT_URLCONF = "project.urls"
+ROOT_URLCONF = "main.urls"
 
-WSGI_APPLICATION = "project.wsgi.application"
+WSGI_APPLICATION = "main.wsgi.application"
 
 if DEBUG:
     # From cookiecutter-django: We need to configure an IP address to

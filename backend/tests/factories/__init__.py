@@ -1,6 +1,6 @@
 # import factory  # type: ignore
 
-# from project.tests.providers import html
+# from main.tests.providers import html
 
 from .user import UserFactory
 

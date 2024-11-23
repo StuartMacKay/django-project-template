@@ -49,4 +49,4 @@ ENTRYPOINT ["/app/backend/bin/django-entrypoint"]
 
 EXPOSE 8000
 
-CMD ["gunicorn", "-c", "/app/backend/project/gunicorn.py", "project.wsgi"]
+CMD ["gunicorn", "-c", "/app/backend/project/gunicorn.py", "main.wsgi"]
