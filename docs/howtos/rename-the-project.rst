@@ -29,7 +29,7 @@ name in the following files:
 ..  code-block:: docker
 
     # Dockerfile, line 52
-    CMD ["gunicorn", "-c", "/app/backend/project/gunicorn.py", "project.wsgi"]
+    CMD ["gunicorn", "-c", "/app/backend/project/gunicorn.py", "main.wsgi"]
 
 ..  code-block:: make
 
@@ -39,25 +39,25 @@ name in the following files:
 ..  code-block:: python
 
     # backend/manage.py, line 6
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "main.settings")
 
 ..  code-block:: python
 
     # backend/project/asgi.py, line 14
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "main.settings")
 
 ..  code-block:: python
 
     # backend/project/celery.py, line 6
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "main.settings")
 
 ..  code-block:: python
 
     # backend/project/settings.py
     # line 91
-    ROOT_URLCONF = "project.urls"
+    ROOT_URLCONF = "main.urls"
     # line 93
-    WSGI_APPLICATION = "project.wsgi.application"
+    WSGI_APPLICATION = "main.wsgi.application"
     # line 121
     DATABASES = {
         "default": env.db_url(default="postgres://project:password@localhost:5432/project")
@@ -66,17 +66,17 @@ name in the following files:
 ..  code-block:: python
 
     # backend/project/wsgi.py, line 14
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "main.settings")
 
 ..  code-block:: toml
 
     # backend/pyproject.toml
     # line 37
-    known_first_party = "project"
+    known_first_party = "main"
     # line 51
-    DJANGO_SETTINGS_MODULE = "project.settings"
+    DJANGO_SETTINGS_MODULE = "main.settings"
     # line 77
-    django_settings_module = "project.settings"
+    django_settings_module = "main.settings"
     # line 93
     "project/__init__.py" = [
         '^__version__ = "{version}"$',

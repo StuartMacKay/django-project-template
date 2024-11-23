@@ -3,7 +3,7 @@ import os
 from celery import Celery  # type: ignore
 from celery.signals import setup_logging  # type: ignore
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "main.settings")
 
 app = Celery()
 

@@ -129,7 +129,7 @@ migrate:
 .PHONY: run
 run: migrate
 	@echo "Run Gunicorn web server..."
-	$(gunicorn) -c project/gunicorn.py project.wsgi
+	$(gunicorn) -c main/gunicorn.py main.wsgi
 
 # ##########
 #   Checks

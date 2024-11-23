@@ -52,7 +52,7 @@ line_length = 88
 
 default_section = "THIRDPARTY"
 known_django = "django"
-known_first_party = "project"
+known_first_party = "main"
 sections = [
     "FUTURE",
     "STDLIB",
@@ -66,7 +66,7 @@ skip_glob=[
 ]
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "project.settings"
+DJANGO_SETTINGS_MODULE = "main.settings"
 FAIL_INVALID_TEMPLATE_VARS = true
 
 addopts = "--strict-markers"
@@ -92,7 +92,7 @@ module = "*.migrations.*"
 ignore_errors = true
 
 [tool.django-stubs]
-django_settings_module = "project.settings"
+django_settings_module = "main.settings"
 
 [tool.bumpver]
 current_version = "v2023.01.0"
