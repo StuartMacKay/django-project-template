@@ -1,6 +1,11 @@
 # Editor temp files
 *~
 
+# Python
+__pycache__/
+*.py[co]
+*.egg*
+
 # Ignore dot files except those required for the project
 .*
 !.dockerignore
