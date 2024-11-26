@@ -1,11 +1,6 @@
 # Editor temp files
 *~
 
-# Python
-__pycache__/
-*.py[co]
-*.egg*
-
 # Ignore dot files except those required for the project
 .*
 !.dockerignore
@@ -27,9 +22,11 @@ docker-compose.override.yml
 # Any local makefiles
 *.mk
 
-/coverage
+# Python
+__pycache__/
+*.py[co]
+*.egg*
+
 /media
 /logs
 /static
-
-docker-compose.override.yml
