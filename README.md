@@ -37,8 +37,8 @@ everybody's liking but it is easy enough to change.
 * Configured with `whitenoise: <//https://github.com/evansd/whitenoise>`_ for serving static files
 * Configured with `Sentry: <https://sentry.io/>`_ for error reporting
 * Configured with `python-json-logger: <https://github.com/madzak/python-json-logger>`_ for logging
-* Development with `black: <https://github.com/psf/black>`_ so everybody gets the code formatting rules they deserve
-* Development with `flake8: <https://flake8.pycqa.org/en/latest/>`_ so people using ed get syntax checking
+* Development with `uv: <https://docs.astral.sh/uv/>`_ for managing python and the dependencies
+* Development with `ruff: <https://astral.sh/ruff>`_ linting and formatting in an instant
 * Development with `isort: <https://pycqa.github.io/isort/>`_ for automatically sorting imports
 * Development with `mypy: <https://mypy-lang.org/>`_ for type-hinting to catch errors
 * Development with `pre-commit: <https://pre-commit.com/>`_ git hooks for running code checks
@@ -95,16 +95,14 @@ divide responsibilities across different teams. It can also be extended, for
 example to add a ``backups`` directory in production for database dumps. That
 way everything is located in one space and easy to manage.
 
-The organsiation of the Django files in the backend is reasonably standard:
+The organisation of the Django files in the backend is reasonably standard:
 
 ..  code-block:: shell
 
     .
     ├── backend
     │   ├── manage.py
-    │   ├── bin
-    │   ├── apps
-    │   ├── project
+    │   ├── main
     │   │   ├── asgi.py
     │   │   ├── celery.py
     │   │   ├── gunicorn.py
@@ -112,71 +110,34 @@ The organsiation of the Django files in the backend is reasonably standard:
     │   │   ├── static
     │   │   ├── templates
     │   │   │   ├── base.html
-    │   │   │   ├── robots.txt
-    │   │   │   └── site
+    │   │   │   └── main
     │   │   │       └── index.html
     │   │   ├── urls.py
-    │   │   ├── views
-    │   │   │   ├── index.py
-    │   │   │   ├── robots.py
-    │   │   │   └── sitemap.py
     │   │   └── wsgi.py
-│   │   ├── tests
-    │   ├── .env.example
-    │   ├── .envrc
-    │   ├── docker-compose.override.yml.example
-    │   ├── docker-compose.yml
-    │   ├── Dockerfile
-    │   ├── Makefile
-    │   ├── pyproject.toml
-    │   └── requirements
-    │       ├── development.in
-    │       ├── docs.in
-    │       ├── production.in
-    │       └── tests.in
-    └── docs
-        ├── howtos
-        └── snippets
+    │   └── tests
+    ├── bin
+    ├── docs
+    │   ├── howtos
+    │   └── snippets
+    ├── .env.example
+    ├── .envrc
+    ├── docker-compose.override.yml.example
+    ├── docker-compose.yml
+    ├── Dockerfile
+    ├── Makefile
+    └── pyproject.toml
 
-The ``backend`` directory contains the configuration files for the project
-tooling (Docker, etc.) The ``requirements`` are divided into separate files
-so only the dependencies for production or testing are installed. The code
-for Django is organised into a root ``project`` module. This in turn has
-all the configuration files needed to run the site.
+The ``root`` directory contains the configuration files for the project
+tooling (Docker, etc.). The code for Django is organised into a root ``main``
+module. This in turn has all the configuration files needed to run the site.
 
-The ``apps`` module is where you add your code:
-
-..  code-block:: python
-
-    from apps.reports import models
-
-That way you can easily see which imports are from the project and which
-are from third-party libraries. It is simply a preference, since the
-``backend`` directory is on the python path, ypu could add the apps there.
-Imports would then take the form:
-
-..  code-block:: python
-
-    from reports import models
-
-The only downside is more clutter in the ``backend`` directory, which is
-entirely subjective.
-
-The root module is named ``project`` purely as a default. Typically, this is
+The root module is named ``main`` purely as a default. Typically, this is
 named after the project/site, however, since it's just a python module, as long
-it is unique for the site, the name does not really matter. However, if you want
-to rename it then there is a script that will take care of it:
+it is unique for the site, the name does not really matter.
 
-..  code-block:: shell
-
-    cd backend
-    ./bin/rename-app <new name>
-
-Since this a one-time operation you can delete the script afterwards.
-
-If you are not using a Unix-like platform then you'll need to edit the files
-manually. The How-To, "Rename The Project App" in the docs directory lists
-all the files, with the line numbers that need to change.
+If you must change it, then you'll need to edit the files manually. The How-To,
+"Rename The Project App" in the docs directory lists all the files, with the
+line numbers that need to change.
 
 How To Run
 ----------
@@ -192,7 +153,7 @@ For a virtualenv, it is as simple as:
 
 ..  code-block:: shell
 
-    make venv run
+    uv venv
 
 For docker:
 
@@ -200,7 +161,7 @@ For docker:
 
     docker compose up
 
-If you don't want to use the Makefile then there is a guide in the How-Tos
+If you don't want to use uv then there is a guide in the How-Tos
 section of the docs, "Using Virtualenv", which will take you through all
 the steps.
 
