@@ -4,7 +4,6 @@
 # Usage:
 #
 #    make clean
-#    make checks
 #    make tests
 
 # This Makefile only works with GNU Make.
@@ -15,21 +14,12 @@ PYTHON = python3.12
 site_python := /usr/bin/env $(PYTHON)
 
 root_dir := $(realpath .)
-src_dir = $(root_dir)/project
 
 venv_name = .venv
 venv_dir = $(root_dir)/$(venv_name)
 python = $(venv_dir)/bin/python
 gunicorn = $(venv_dir)/bin/gunicorn
 
-pip = $(python) -m pip
-pip-compile = $(venv_dir)/bin/pip-compile
-pip-sync = $(venv_dir)/bin/pip-sync
-django = $(python) $(root_dir)/manage.py
-flake8 = $(python) -m flake8
-black = $(python) -m black
-isort = $(python) -m isort
-mypy = $(python) -m mypy
 pytest = $(python) -m pytest
 coverage = $(python) -m coverage
 
@@ -68,54 +58,8 @@ clean-coverage:
 	rm -rf .coverage
 	rm -rf coverage
 
-.PHONY: clean-requirements
-clean-requirements:
-	@echo "Deleting the pinned dependencies files..."
-	rm -f requirements/*.txt
-
 .PHONY: clean
-clean: clean-coverage clean-mypy clean-tests clean-requirements
-	@echo "Deleting all the pinned dependencies files..."
-
-# ##############
-#   Virtualenv
-# ##############
-#
-# Create the virtualenv and install all the dependencies for development.
-# If the virtualenv already exists then synchronise the installed packages
-# with those listed in requirements/development.txt. The list of packages
-# will be updated if any of the input files change.
-
-$(venv_dir):
-	@echo "Creating the virtualenv..."
-	$(site_python) -m venv $(venv_dir)
-	$(pip) install --upgrade pip setuptools wheel
-	$(pip) install pip-tools
-
-requirements/development.txt: requirements/development.in requirements/docs.in requirements/production.in requirements/tests.in
-	@echo "Pin the list of dependencies for development..."
-	$(pip-compile) requirements/development.in
-
-requirements/docs.txt: requirements/docs.in
-	@echo "Pin the list dependencies for the docs..."
-	$(pip-compile) requirements/docs.in
-
-requirements/production.txt: requirements/production.in
-	@echo "Pin the list dependencies for production..."
-	$(pip-compile) requirements/production.in
-
-requirements/tests.txt: requirements/production.in requirements/tests.in
-	@echo "Pin the list of dependencies for the tests..."
-	$(pip-compile) requirements/tests.in
-
-.PHONY: requirements
-requirements: requirements/development.txt requirements/docs.txt requirements/production.txt requirements/tests.txt
-	@echo "Pin the list of dependencies for any requirements file that changed ..."
-
-.PHONY: venv
-venv: $(venv_dir) requirements
-	@echo "Build the virtualenv for development..."
-	$(pip-sync) requirements/development.txt
+clean: clean-coverage clean-mypy clean-tests
 
 # ##########
 #   Django
@@ -130,34 +74,6 @@ migrate:
 run: migrate
 	@echo "Run Gunicorn web server..."
 	$(gunicorn) -c main/gunicorn.py main.wsgi
-
-# ##########
-#   Checks
-# ##########
-
-.PHONY: flake8
-flake8:
-	@echo "Check the code for flake8 violations..."
-	$(flake8) $(src_dir)
-
-.PHONY: isort
-isort:
-	@echo "Check the code for import sort order violations..."
-	$(isort) --check $(src_dir)
-
-.PHONY: black
-black:
-	@echo "Check the code for formatting rules violations..."
-	$(black) --check $(src_dir)
-
-.PHONY: mypy
-mypy:
-	@echo "Check the type annotations..."
-	$(mypy) $(src_dir)
-
-.PHONY: checks
-checks: flake8 black isort mypy
-	@echo "Run all the code checks..."
 
 # #########
 #   Tests
