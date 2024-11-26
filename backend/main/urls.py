@@ -1,23 +1,15 @@
 from django.conf import settings
 from django.contrib import admin
-from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
-
-from .views import IndexView, RobotsView, SitemapView
+from django.views.generic import TemplateView
 
 urlpatterns = [
-    path("", IndexView.as_view(), name="index"),
+    path("", TemplateView.as_view(template_name="main/home.html"), name="home"),
 ]
-
 
 urlpatterns += [
     # Change the path to the Django Admin to something non-standard.
     path(settings.ADMIN_PATH, admin.site.urls),  # type: ignore
-]
-
-urlpatterns += [
-    path("robots.txt", RobotsView.as_view()),
-    path("sitemap.xml", sitemap, {"sitemaps": {"index": SitemapView}}),
     path("watchman/", include("watchman.urls")),
 ]
 
