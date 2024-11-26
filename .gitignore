@@ -21,6 +21,9 @@ __pycache__/
 !.python-version
 !.readthedocs.yml
 
+# Docker
+docker-compose.override.yml
+
 # Any local makefiles
 *.mk
 
